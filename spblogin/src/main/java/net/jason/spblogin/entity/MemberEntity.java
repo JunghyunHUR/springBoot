@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import net.jason.spblogin.dto.MemberDto;
 
 @Entity
 @Setter
@@ -26,6 +27,14 @@ public class MemberEntity {
 
     @Column
     private String memname;
+
+    public static MemberEntity toMemberEntity(MemberDto memberDto){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setMememail(memberDto.getMememail());
+        memberEntity.setMemname(memberDto.getMemname());
+        memberEntity.setMempass(memberDto.getMempass());
+        return memberEntity;
+    }
 
     
 }

@@ -17,4 +17,4 @@ spring:
         open-in-view: false
         show-sql: true
         hibernate:
-            ddl_auto: create
+            ddl_auto: update

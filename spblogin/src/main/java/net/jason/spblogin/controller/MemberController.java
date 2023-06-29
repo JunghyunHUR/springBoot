@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import net.jason.spblogin.dto.MemberDto;
 import net.jason.spblogin.service.MemberService;
@@ -28,6 +29,25 @@ public class MemberController {
         System.out.println("memberDto = " + memberDto);
         memberService.save(memberDto);
         return "index";
+    }
+
+    //login
+    @GetMapping("/member/login")
+    public String loginForm(){
+        return "login";
+    }
+
+    @PostMapping("member/login")
+    public String login(@ModelAttribute MemberDto memberDto, HttpSession session){
+        MemberDto loginResult = memberService.login(memberDto);
+        if(loginResult != null){
+            // success
+            session.setAttribute("loginEmail", loginResult.getMememail());
+            return "main";
+        }else{
+            // fail
+            return "login";
+        }
     }
 
     
