@@ -1,8 +1,12 @@
 package net.jason.spblogin.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
@@ -50,5 +54,19 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/member/")
+    public String list(Model model){
+        List<MemberDto> memberDtoList = memberService.findAll();
+        // get from model and send to list
+        model.addAttribute("lists", memberDtoList);
+        return "list";
+    }
+
+    @GetMapping("/member/{num}")
+    public String view(@PathVariable int num, Model model){
+        MemberDto memberDto = memberService.findById(num);
+        model.addAttribute("member", memberDto);
+        return "view";
+    }
     
 }

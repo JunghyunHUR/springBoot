@@ -1,5 +1,7 @@
 package net.jason.spblogin.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -40,6 +42,36 @@ public class MemberService {
             }
         }else{
             //if it's not exists
+            return null;
+        }
+    }
+
+    public List<MemberDto> findAll() {
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        List<MemberDto> memberDtoList = new ArrayList<>();
+        for(MemberEntity memberEntity : memberEntityList){
+            memberDtoList.add(MemberDto.toMemberDto(memberEntity));
+            // MemberDto memberDto = MemberDto.toMemberDto(memberEntity);
+            // memberDtoList.add(memberDto);
+        }
+        return memberDtoList;
+    }
+
+    public MemberDto findById(int num){
+        /**
+         * optional 내부에 담긴 객체를 반환.
+         * 만약 null이 나오면 NosuchElementException이 발생.
+         * isPresent()로 이 부분을 체크하면 됨.
+         * if(rs.isPresent()){
+         *      return rs.get();
+         * }else{
+         *      return rs.orElse(null);
+         * }
+         */
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(num);
+        if(optionalMemberEntity.isPresent()){
+            return MemberDto.toMemberDto(optionalMemberEntity.get());
+        }else{
             return null;
         }
     }

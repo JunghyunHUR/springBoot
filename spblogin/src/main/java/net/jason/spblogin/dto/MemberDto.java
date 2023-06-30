@@ -18,7 +18,7 @@ public class MemberDto {
     private String mempass;
     private String memname;
 
-    public MemberDto toMemberDto(MemberEntity memberEntity){
+    public static MemberDto toMemberDto(MemberEntity memberEntity){
         MemberDto memberDto = new MemberDto();
         memberDto.setNum(memberEntity.getNum());
         memberDto.setMememail(memberEntity.getMememail());
