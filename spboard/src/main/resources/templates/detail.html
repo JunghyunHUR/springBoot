@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>번호</th>
+            <td th:text="${bbs.num}"></td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td th:text="${bbs.bbsTitle}"></td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td th:text="${bbs.bbsWriter}"></td>
+        </tr>
+        <tr>
+            <th>날짜</th>
+            <td th:text="${bbs.bbsCreatedTime}"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td th:text="${bbs.bbsContents}"></td>
+        </tr>
+    </table>
+    <button onclick="list()">목록</button>
+    <button onclick="update()">수정</button>
+    <button onclick="del()">삭제</button>
+    <button onclick="write()">글쓰기</button>
+    <script>
+        const list = () => {
+            location.href = "/bbs/";
+        }
+        const update = () => {
+            location.href = "/bbs/";
+        }
+        const del = () => {
+            location.href = "/bbs/";
+        }
+        const write = () => {
+            location.href = "/bbs/";
+        }
+    </script>
+</body>
+</html>

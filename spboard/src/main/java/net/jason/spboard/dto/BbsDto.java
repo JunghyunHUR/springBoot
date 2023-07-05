@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.jason.spboard.entity.BbsEntity;
 
 @Getter
 @Setter
@@ -21,6 +22,18 @@ public class BbsDto {
     private String bbsContents;
     private int bbsHits;
     private LocalDateTime bbsCreatedTime;
-    private LocalDateTime bbsUpdateTime;
+    private LocalDateTime bbsUpdatedTime;
     
+    public static BbsDto toSaveDto(BbsEntity bbsEntity){
+        BbsDto bbsDto = new BbsDto();
+        bbsDto.setNum(bbsEntity.getNum());
+        bbsDto.setBbsWriter(bbsEntity.getBbsWriter());
+        bbsDto.setBbsPass(bbsEntity.getBbsPass());
+        bbsDto.setBbsTitle(bbsEntity.getBbsTitle());
+        bbsDto.setBbsContents(bbsEntity.getBbsContents());
+        bbsDto.setBbsHits(bbsEntity.getBbsHits());
+        bbsDto.setBbsCreatedTime(bbsEntity.getBbsCreatedTime());
+        bbsDto.setBbsUpdatedTime(bbsEntity.getBbsUpdatedTime());
+        return bbsDto;
+    }
 }

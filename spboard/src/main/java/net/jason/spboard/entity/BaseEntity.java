@@ -20,6 +20,6 @@ public class BaseEntity {
 
     @CreationTimestamp
     @Column(insertable = false)
-    private LocalDateTime bbsUpdateTime; 
+    private LocalDateTime bbsUpdatedTime; 
     
 }
