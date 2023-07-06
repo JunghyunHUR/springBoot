@@ -40,4 +40,15 @@ public class BbsEntity extends BaseEntity{
         bbsEntity.setBbsHits(0);
         return bbsEntity;
     }
+
+    public static BbsEntity toUpdateEntity(BbsDto bbsDto){
+        BbsEntity bbsEntity = new BbsEntity();
+        bbsEntity.setNum(bbsDto.getNum());
+        bbsEntity.setBbsWriter(bbsDto.getBbsWriter());
+        bbsEntity.setBbsPass(bbsDto.getBbsPass());
+        bbsEntity.setBbsTitle(bbsDto.getBbsTitle());
+        bbsEntity.setBbsContents(bbsDto.getBbsContents());
+        bbsEntity.setBbsHits(bbsDto.getBbsHits());
+        return bbsEntity;
+    }
 }

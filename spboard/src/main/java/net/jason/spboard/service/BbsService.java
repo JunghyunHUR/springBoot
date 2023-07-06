@@ -53,4 +53,16 @@ public class BbsService {
             return null;
         }
     }
+
+    public BbsDto update(BbsDto bbsDto) {
+        BbsEntity bbsEntity = BbsEntity.toUpdateEntity(bbsDto);
+        bbsRepository.save(bbsEntity);
+        return findById(bbsDto.getNum());
+    }
+
+    public void delete(Long num) {
+        bbsRepository.deleteById(num);
+    }
+
+
 }

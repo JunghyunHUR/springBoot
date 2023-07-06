@@ -48,4 +48,25 @@ public class SpBoardController {
         model.addAttribute("bbs", bbsDto);
         return "detail";
     }
+
+    @GetMapping("/update/{num}")
+    public String updateForm(@PathVariable Long num, Model model){
+        BbsDto bbsDto = bbsService.findById(num);
+        model.addAttribute("bbs", bbsDto);
+        return "update";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute BbsDto bbsDto, Model model){
+        BbsDto bbs = bbsService.update(bbsDto);
+        model.addAttribute("bbs",bbs);
+        // return "detail";
+        return "redirect:/bbs/" + bbsDto.getNum();
+    }
+
+    @GetMapping("delete/{num}")
+    public String delete(@PathVariable Long num){
+        bbsService.delete(num);
+        return "redirect:/bbs/";
+    }
 }

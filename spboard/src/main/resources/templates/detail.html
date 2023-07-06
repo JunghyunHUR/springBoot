@@ -37,13 +37,20 @@
             location.href = "/bbs/";
         }
         const update = () => {
-            location.href = "/bbs/";
+            const num = [[${bbs.num}]];
+            location.href = "/bbs/update/" + num;
         }
         const del = () => {
-            location.href = "/bbs/";
+            const num = [[${bbs.num}]];
+            let y = confirm("정말로 삭제하시겠습니까?");
+            if(y){
+                location.href = "/bbs/delete/" + num;
+            }else{
+                return;
+            }
         }
         const write = () => {
-            location.href = "/bbs/";
+            location.href = "/bbs/save";
         }
     </script>
 </body>
