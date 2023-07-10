@@ -15,6 +15,7 @@ import net.jason.spboard.entity.BbsEntity;
 @AllArgsConstructor
 @NoArgsConstructor //BbsDto(){}
 public class BbsDto {
+    
     private Long num;
     private String bbsWriter;
     private String bbsPass;
@@ -23,6 +24,14 @@ public class BbsDto {
     private int bbsHits;
     private LocalDateTime bbsCreatedTime;
     private LocalDateTime bbsUpdatedTime;
+    
+    public BbsDto(Long num, String bbsWriter, String bbsTitle, int bbsHits, LocalDateTime bbsCreatedTime) {
+        this.num = num;
+        this.bbsWriter = bbsWriter;
+        this.bbsTitle = bbsTitle;
+        this.bbsHits = bbsHits;
+        this.bbsCreatedTime = bbsCreatedTime;
+    }
     
     public static BbsDto toSaveDto(BbsEntity bbsEntity){
         BbsDto bbsDto = new BbsDto();

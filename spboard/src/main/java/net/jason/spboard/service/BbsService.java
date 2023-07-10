@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -30,6 +35,41 @@ public class BbsService {
         }
         return bbsDtoList;
     }
+
+    public Page<BbsDto> paging(Pageable pageable) {
+        int page = pageable.getPageNumber() - 1;
+        int pageLimit = 10;
+        //select * from spb_bbs order by num desc limit 0, 10
+        Page<BbsEntity> bbsEntitis = bbsRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "num")));
+        /*
+         * bbsEntities.getContent() - 해당 페이지에 있는 글
+         * bbsEntities.getTotalElements() - 전체 글의 갯수
+         * bbsEntities.getNumber() - 페이지 번호
+         * bbsEntities.getTotalPage() - 한 페이지에 보여지는 글의 갯수
+         * bbsEntities.getSize() - 한 페이지에 보여지는 글의 갯수
+         * bbsEntities.hasPrevious() - 이전 페이지 존재 여부
+         * bbsEntities.isFirst() -첫 페이지인지 여부
+         * bbsEntities.isLast() - 마지막 페이지 여부
+         */
+        Page<BbsDto> bbsDtos = bbsEntitis.map(bbs -> new BbsDto(bbs.getNum(), bbs.getBbsWriter(), bbs.getBbsTitle(), bbs.getBbsHits(), bbs.getBbsCreatedTime()));
+        return bbsDtos;
+    }
+
+    // 인터페이스 Pageable 의 각 메서드 기능
+    // 1. unpaged() - pagination 설정이 없는 Pageable 인터페이스 반환
+    // 2. ofSize(int pageSize) - pageSize가 지정된 첫 번째 페이지
+    // 3. isPaged() - 현재 Pageable에 pagination 정보가 포함되어 있는지 여부
+    // 4. isUnpaged()
+    // 5. getPageNumber() - 페이지 반환
+    // 6. getPageSize()
+    // 7. getOffest()
+    // 8. getSort()
+    // 9. next()
+    // 10. previousOfFirst()
+    // 11.first()
+    // 12.withPage(int pageNumber)
+    // 13. hasPrevious()
+    // 14. toOptiona()
 
     // 조회수 업데이트
     /*
@@ -64,5 +104,19 @@ public class BbsService {
         bbsRepository.deleteById(num);
     }
 
+    // public void addPage(){
+    //     BbsDto bbsDto = new BbsDto();
+    //     for(int i = 1; i <= 1000 ; i++){
+    //         String title = i + "테스트 입니다." + i + "번";
+    //         String content = i + "테스트 입니다." + i + "번";
+    //         String write = "홍길" + i;
+    //         bbsDto.setBbsTitle(title);
+    //         bbsDto.setBbsWriter(write);
+    //         bbsDto.setBbsContents(content);
+
+    //         BbsEntity bbsEntity = BbsEntity.toSaveEntity(bbsDto);
+    //         bbsRepository.save(bbsEntity);
+    //     }
+    // }
 
 }
